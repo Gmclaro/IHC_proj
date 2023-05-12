@@ -11,41 +11,66 @@ function Schedule () {
     const [duration, setDuration] = useState("60");
     const [success, setSuccess] = useState("");
     const [loggedUser, setUser] = React.useState("");
-
     
 
-    async function newSchedule(event) {
+    useEffect(() => {
+        // Load schedules from JSON file on component mount
+        const fetchSchedules = async () => {
+          try {
+            const response = await fetch("schedules.json");
+            const data = await response.json();
+            setSchedules(data.schedule);
+          } catch (error) {
+            console.log("Error fetching schedules:", error);
+          }
+        };
+    
+        fetchSchedules();
+      }, []);
+    
+      async function newSchedule(event) {
         event.preventDefault();
-
+    
         // If no user is logged in, redirect to login page
-        if (loggedUser === "") {
-            window.location.href = "/Login"
-        }
-
-        console.log (date, duration);
-        // Create new date with date and time
-        const newDate = new Date(date);
-        const response = await fetch("https://guysauceperformance.herokuapp.com/api/v1/schedule", {
+    
+        console.log(date, duration);
+    
+        // Create new schedule object
+        const newSchedule = {
+          _id: Date.now(),
+          date: new Date(date),
+          duration: parseInt(duration),
+          username: loggedUser.username,
+        };
+    
+        // Update schedules state with new schedule
+        setSchedules([...schedules, newSchedule]);
+    
+        // Simulate successful response
+        setSuccess(true);
+    
+        // Simulate saving new schedule to JSON file (you can use an API endpoint here instead)
+        try {
+          const response = await fetch("schedules.json", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                date: newDate,
-                duration: duration,
-                username: loggedUser.username,
-            })
-        })
-        if (response.ok) {
-            setSuccess(response.status);
-            window.location.href = "/Schedule";
+            body: JSON.stringify({ schedule: [...schedules, newSchedule] }),
+          });
+          if (!response.ok) {
+            console.log("Error saving new schedule");
+          }
+        } catch (error) {
+          console.log("Error saving new schedule:", error);
         }
-        else {
-            console.log("Error");
-            setSuccess(response.status);
-        }
-    }
-
+    
+        // Simulate redirect after successful response
+        setTimeout(() => {
+          window.location.href = "/Schedule";
+        }, 2000);
+      }
+    
 
     let subtitle
     Modal.setAppElement('#root');
@@ -54,44 +79,29 @@ function Schedule () {
 
     function openModal() {
         // Check if user is logged in
-        if (loggedUser === "") { 
-            window.location.href = "/Login"
-            return
-        }
-        setIsOpen(true);
-      }
     
-      function afterOpenModal() {
+        setIsOpen(true);
+    }
+    
+    function afterOpenModal() {
         // references are now sync'd and can be accessed.
         subtitle.style.color = '#231F20';
-      }
+    }
     
-      function closeModal() {
+    function closeModal() {
         setIsOpen(false);
-      }
+    }
 
     const [schedules, setSchedules] = useState([])
 
     useEffect(() => {
-        fetch("https://guysauceperformance.herokuapp.com/api/v1/schedule", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            try{
-
-                setSchedules(data.schedule)
-
-            }catch{
-                console.log("Error");
-            }
-        }
-        )
-    }, [])
+        // Simulate API call and update schedule data
+        const mockData = [
+            { _id: 1, date: new Date(), duration: 60, username: "John" },
+            { _id: 2, date: new Date(), duration: 90, username: "Jane" },
+        ];
+        setSchedules(mockData);
+    }, []);
 
     
 
