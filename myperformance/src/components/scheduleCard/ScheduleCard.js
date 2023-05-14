@@ -1,41 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
+import { FaTrashAlt } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
+
 
 const ScheduleCard = (props) => {
-  const [loggedUser, setUser] = React.useState("");
+  const [loggedUser, setLoggedUser] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedScheduleId, setSelectedScheduleId] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       // Simulating a successful login
       setTimeout(() => {
-        setUser({ username: "JohnDoe" });
+        setLoggedUser({ username: "JohnDoe" });
       }, 2000); // Simulating a delay of 2 seconds
     }
   }, []);
 
-  async function removeSchedule() {
-    // Get username from logged in user
-    const username = loggedUser.username;
-
-    // Get all inputs from doc and check which one is checked
-    const inputs = document.querySelectorAll("input");
-    let checked = [];
-    inputs.forEach((input) => {
-      if (input.checked) {
-        checked.push(input);
-      }
-    });
-    // Get value from checked input
-    const scheduleId = checked[0].value;
-
-    console.log(scheduleId);
-
+  const handleDelete = () => {
+    // Perform deletion logic here using selectedScheduleId
+    console.log(`Deleting schedule with id ${selectedScheduleId}`);
+    setShowModal(false);
     // Simulating a successful schedule removal
     setTimeout(() => {
       window.location.reload();
     }, 500);
-  }
+  };
+
+  const openModal = (id) => {
+    setSelectedScheduleId(id);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const date = props.date;
   const time = props.time;
@@ -52,11 +53,32 @@ const ScheduleCard = (props) => {
         <p className="black schedule-title">USER</p>
         <p className="black schedule-description">{user}</p>
       </div>
-      <form className="checkbox-container" onChange={removeSchedule}>
-        <input className="checkbox" type="checkbox" id="check" name="check" value={id} />
-      </form>
+      <div className="text-box">
+        <p className="black schedule-title">EXERCISE TYPE</p>
+        <p className="black schedule-description">{props.exerciseType}</p>
+        
+      </div>
+      <button className="delete-button" onClick={() => openModal(id)}>
+        <FaTrashAlt />
+      </button>
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this schedule?</p>
+            <div className="modal-buttons">
+              <button className="cancel-button" onClick={closeModal}>
+                <FaTimes />
+              </button>
+              <button className="delete-button" onClick={() => openModal(id)}>
+                <FaTrashAlt />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ScheduleCard;
+export default ScheduleCard

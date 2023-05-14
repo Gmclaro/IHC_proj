@@ -261,6 +261,20 @@
     justify-content: center;
     align-items: center;
 }
+.delete-button {
+    color: red;
+    border:none;
+    background: none;
+    padding: 0;
+    font-size: 1.5rem;
+}
+.cancel-button {
+    color: #231F20;
+    border:none;
+    background: none;
+    padding: 0;
+    font-size: 1.5rem;
+}
 
 .btn-add{
     animation: fade-in-move-up 1.2s;
@@ -287,6 +301,10 @@
     transition: all 0.5s ease 0s;
     width: 500px;
     height: 400px;
+}
+.modal-content {
+    opacity: 1; /* Increase the opacity value */
+    color: #231F20;
 }
 
 .btn-close{

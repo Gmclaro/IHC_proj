@@ -3,6 +3,7 @@ import ScheduleCard from "../components/scheduleCard/ScheduleCard"
 import Modal from "react-modal"
 import { Icon } from '@iconify/react';
 import "./style.css"
+import { schedule } from "./MockData.js";
 
 
 function Schedule () {
@@ -11,24 +12,15 @@ function Schedule () {
     const [duration, setDuration] = useState("60");
     const [success, setSuccess] = useState("");
     const [loggedUser, setUser] = React.useState("");
+    const [exerciseType, setExerciseType] = useState("");
     
 
     useEffect(() => {
         // Load schedules from JSON file on component mount
-        const fetchSchedules = async () => {
-          try {
-            const response = await fetch("schedules.json");
-            const data = await response.json();
-            setSchedules(data.schedule);
-          } catch (error) {
-            console.log("Error fetching schedules:", error);
-          }
-        };
+        console.log(schedule);
+    }, []);
     
-        fetchSchedules();
-      }, []);
-    
-      async function newSchedule(event) {
+    async function newSchedule(event) {
         event.preventDefault();
     
         // If no user is logged in, redirect to login page
@@ -37,39 +29,20 @@ function Schedule () {
     
         // Create new schedule object
         const newSchedule = {
-          _id: Date.now(),
-          date: new Date(date),
-          duration: parseInt(duration),
-          username: loggedUser.username,
+            _id: Date.now(),
+            date: new Date(date),
+            duration: parseInt(duration),
+            username: loggedUser.username,
         };
     
         // Update schedules state with new schedule
-        setSchedules([...schedules, newSchedule]);
-    
-        // Simulate successful response
-        setSuccess(true);
-    
-        // Simulate saving new schedule to JSON file (you can use an API endpoint here instead)
-        try {
-          const response = await fetch("schedules.json", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ schedule: [...schedules, newSchedule] }),
-          });
-          if (!response.ok) {
-            console.log("Error saving new schedule");
-          }
-        } catch (error) {
-          console.log("Error saving new schedule:", error);
-        }
-    
-        // Simulate redirect after successful response
-        setTimeout(() => {
-          window.location.href = "/Schedule";
-        }, 2000);
-      }
+        setSchedules([...schedules, newSchedule]);    
+        // Update mock data with new schedule
+        schedule = [...schedule, newSchedule]
+
+        console.log(schedule)
+        
+    }
     
 
     let subtitle
@@ -92,25 +65,14 @@ function Schedule () {
         setIsOpen(false);
     }
 
-    const [schedules, setSchedules] = useState([])
-
-    useEffect(() => {
-        // Simulate API call and update schedule data
-        const mockData = [
-            { _id: 1, date: new Date(), duration: 60, username: "John" },
-            { _id: 2, date: new Date(), duration: 90, username: "Jane" },
-        ];
-        setSchedules(mockData);
-    }, []);
-
-    
+    const [schedules, setSchedules] = useState(schedule)
 
     return (
         <div className="flex-row-center">
         <div className="container-m">
             <div className="schedule-top">
                 <p className="black" style={{fontWeight:"500"}}>SCHEDULE</p>
-                <div className="btn-xs" onClick={openModal}>Adicionar novo</div>
+                <div className="btn-xs" onClick={openModal}>New Schedule</div>
             </div>
             <div className="schedule-table">
                 {
@@ -139,24 +101,37 @@ function Schedule () {
                 contentLabel="Modal"
             >
                 <div className="modal-header">
-                    <h2 ref={_subtitle => (subtitle = _subtitle)} className="black" style={{fontWeight:"500"}}>Adicionar Horário</h2>
+                    <h2 ref={_subtitle => (subtitle = _subtitle)} className="black" style={{fontWeight:"500"}}>Add Schedule</h2>
                     <div className="btn-close" onClick={closeModal}><Icon  icon="carbon:close-filled" color="black" /></div>
                 </div>
                 <form className="modal-body" onSubmit={newSchedule}>
                     <div className="flex-row" style={{height:"100%"}}>
                         <div className="flex-column">
-                            <label className="black" style={{fontWeight:"500"}}>Data</label>
+                            <label className="black" style={{fontWeight:"500"}}>Date</label>
                             <input type="datetime-local" name="date" id="date" className="input" value={date} onChange={(e) => setDate(e.target.value)}/>
                         </div>
                     </div>
                     <div className="flex-row" style={{height:"100%"}}>
                         <div className="flex-column">
-                            <label className="black" style={{fontWeight:"500"}}>Duração (minutos)</label>
+                            <label className="black" style={{fontWeight:"500"}}>Duration (minutes)</label>
                             <input type="number" name="duration" id="duration" className="input" placeholder="60" value={duration} onChange={(e) => setDuration(e.target.value)}/>
                         </div>
                     </div>
+                    {/* I want to add a dropdown menu here with a type of exercises (leg , chest, )  */}
+                    <div className="flex-row" style={{height: "100%"}}>
+                        <div className="flex-column">
+                            <label className="black" style={{fontWeight: "500"}}>Exercise Type</label>
+                            <select name="exerciseType" id="exerciseType" className="input" value={exerciseType} onChange={(e) => setExerciseType(e.target.value)}>
+                            <option value="">Select exercise type</option>
+                            <option value="Leg">Leg</option>
+                            <option value="Chest">Chest</option>
+                            {/* Add more options for other exercise types */}
+                            </select>
+                        </div>
+                    </div>
+
                     <div className="modal-bottom">
-                        <input type="submit" value="Adicionar" className="btn-xs" />
+                        <input type="submit" value="Add" className="btn-xs" />
                         <p className={success === true ? "success-txt" : "error-txt"}></p>
                     </div>
 

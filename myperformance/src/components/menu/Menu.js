@@ -61,11 +61,14 @@ function Menu() {
             <div className="menuContainer">
 
               <Link to='/Schedule' style={{ textDecoration: 'none' }} className="menu-item-wrapper" onClick={() =>{setIsActive(false)}}>
-                <p className="menu-item">Horário</p>
+                <p className="menu-item">Schedule</p>
               </Link>
 
               <Link to='/Profile' style={{ textDecoration: 'none' }} className="menu-item-wrapper" onClick={() =>{setIsActive(false)}} >
-                <p className="menu-item">Perfil</p>
+                <p className="menu-item">Profile</p>
+              </Link>
+              <Link to='/Login' style={{ textDecoration: 'none' }} className="menu-item-wrapper" onClick={() =>{setIsActive(false)}} >
+                <p className="menu-item">Login</p>
               </Link>
 
             </div>

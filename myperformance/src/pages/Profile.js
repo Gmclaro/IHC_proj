@@ -72,10 +72,10 @@ function Profile() {
             <div className="container-m">
                 <div className="schedule-top">
                     <p className="black" style={{ fontWeight: "500" }}>
-                        PERFIL
+                        Profile
                     </p>
                     <div className="btn-xs" onClick={logout}>
-                        Terminar Sessão
+                        End Session
                     </div>
                 </div>
                 <div className="schedule-table">

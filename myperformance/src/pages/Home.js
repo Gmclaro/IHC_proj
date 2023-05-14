@@ -20,7 +20,7 @@ function Home () {
                 <p className="yellow subtitle">PERSONAL TRAINING</p>
             </div>
             <form onSubmit={getStarted}>
-                <input type="submit" value={"COMEÇAR"}  className="btn-s"/>
+                <input type="submit" value={"Start"}  className="btn-s"/>
             </form>
         </div>
         <div className="vector-wrapper">
