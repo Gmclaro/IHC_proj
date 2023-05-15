@@ -129,6 +129,8 @@ function Schedule () {
                             <option value="Shoulder">Shoulder</option>
                             <option value="Biceps">Biceps</option>
                             <option value="Triceps">Triceps</option>
+                            <option value="Core">Core</option>
+                            <option value="Cardio">Cardio</option>
                             {/* Add more options for other exercise types */}
                             </select>
                         </div>

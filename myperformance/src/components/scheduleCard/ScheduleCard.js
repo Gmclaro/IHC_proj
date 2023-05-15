@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import { FaTrashAlt } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
 
 
 const ScheduleCard = (props) => {
@@ -61,6 +62,9 @@ const ScheduleCard = (props) => {
       <button className="delete-button" onClick={() => openModal(id)}>
         <FaTrashAlt />
       </button>
+      <button className="edit-button" onClick={() => openModal(id)}>
+        <FaEdit />
+      </button>
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -70,7 +74,7 @@ const ScheduleCard = (props) => {
               <button className="cancel-button" onClick={closeModal}>
                 <FaTimes />
               </button>
-              <button className="delete-button" onClick={() => openModal(id)}>
+              <button className="delete-button" onClick={handleDelete}>
                 <FaTrashAlt />
               </button>
             </div>
