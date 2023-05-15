@@ -41,6 +41,7 @@ const ScheduleCard = (props) => {
   const date = props.date;
   const time = props.time;
   const user = props.user;
+  const exerciseType = props.exerciseType;
   const id = props.id;
 
   return (
@@ -50,13 +51,12 @@ const ScheduleCard = (props) => {
         <p className="black schedule-description">{time}</p>
       </div>
       <div className="text-box">
-        <p className="black schedule-title">USER</p>
+        <p className="black schedule-title">User</p>
         <p className="black schedule-description">{user}</p>
       </div>
       <div className="text-box">
-        <p className="black schedule-title">EXERCISE TYPE</p>
-        <p className="black schedule-description">{props.exerciseType}</p>
-        
+        <p className="black schedule-title">Body Part</p>
+        <p className="black schedule-description">{exerciseType}</p>
       </div>
       <button className="delete-button" onClick={() => openModal(id)}>
         <FaTrashAlt />

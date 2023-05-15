@@ -34,7 +34,7 @@ function Login() {
         <div className="top"></div>
         <div className="bottom"></div>
         <div className="center">
-          <h2>Iniciar Sessão</h2>
+          <h2>Login</h2>
           <form onSubmit={login}>
             <input
               type="email"
@@ -52,8 +52,8 @@ function Login() {
             <input type="submit" className="btn-m" value="Login" />
           </form>
           <Link to="/Register" className="help-text">
-            <p>Ainda não tens conta? </p>
-            <p style={{ color: "#446DD9", paddingLeft: "10px" }}>Criar agora → </p>
+            <p>Don't have an account? </p>
+            <p style={{ color: "#446DD9", paddingLeft: "10px" }}>Register now! → </p>
           </Link>
         </div>
       </div>

@@ -3,7 +3,7 @@ import ScheduleCard from "../components/scheduleCard/ScheduleCard"
 import Modal from "react-modal"
 import { Icon } from '@iconify/react';
 import "./style.css"
-import { schedule } from "./MockData.js";
+import { Schedulex } from "./MockData.js";
 
 
 function Schedule () {
@@ -17,7 +17,7 @@ function Schedule () {
 
     useEffect(() => {
         // Load schedules from JSON file on component mount
-        console.log(schedule);
+        console.log(Schedulex);
     }, []);
     
     async function newSchedule(event) {
@@ -38,9 +38,9 @@ function Schedule () {
         // Update schedules state with new schedule
         setSchedules([...schedules, newSchedule]);    
         // Update mock data with new schedule
-        schedule = [...schedule, newSchedule]
+        //Schedulex = [...Schedulex, newSchedule]
 
-        console.log(schedule)
+        console.log(Schedulex)
         
     }
     
@@ -65,7 +65,7 @@ function Schedule () {
         setIsOpen(false);
     }
 
-    const [schedules, setSchedules] = useState(schedule)
+    const [schedules, setSchedules] = useState(Schedulex)
 
     return (
         <div className="flex-row-center">
@@ -85,7 +85,7 @@ function Schedule () {
                         const timeFormatted = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + "-" + endTime.getHours() + ":" + String(endTime.getMinutes()).padStart(2, '0')
 
                         return (
-                            <ScheduleCard key={schedule._id} id={schedule._id} date={dateFormatted} time={timeFormatted} user={schedule.username} />
+                            <ScheduleCard key={schedule._id} id={schedule._id} date={dateFormatted} time={timeFormatted} user={schedule.username} exerciseType = {schedule.exerciseType}/>
                         )
                     })
                 }
@@ -120,11 +120,15 @@ function Schedule () {
                     {/* I want to add a dropdown menu here with a type of exercises (leg , chest, )  */}
                     <div className="flex-row" style={{height: "100%"}}>
                         <div className="flex-column">
-                            <label className="black" style={{fontWeight: "500"}}>Exercise Type</label>
+                            <label className="black" style={{fontWeight: "500"}}>Body Part</label>
                             <select name="exerciseType" id="exerciseType" className="input" value={exerciseType} onChange={(e) => setExerciseType(e.target.value)}>
-                            <option value="">Select exercise type</option>
+                            <option value="">Select body part</option>
                             <option value="Leg">Leg</option>
                             <option value="Chest">Chest</option>
+                            <option value="Back">Back</option>
+                            <option value="Shoulder">Shoulder</option>
+                            <option value="Biceps">Biceps</option>
+                            <option value="Triceps">Triceps</option>
                             {/* Add more options for other exercise types */}
                             </select>
                         </div>

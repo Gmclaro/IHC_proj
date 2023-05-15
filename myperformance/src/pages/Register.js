@@ -25,7 +25,7 @@ function Register() {
         <div className="top"></div>
         <div className="bottom"></div>
         <div className="center">
-          <h2>Registar Conta</h2>
+          <h2>Register </h2>
           <form onSubmit={registerUser}>
             <input
               type="text"
@@ -51,9 +51,9 @@ function Register() {
 
           <Link to="/Login" className="help-text">
             {" "}
-            <p>Já tens conta? </p>
+            <p>Already have an account? </p>
             <p style={{ color: "#446DD9", paddingLeft: "10px" }}>
-              Iniciar agora →{" "}
+              Login now →{" "}
             </p>{" "}
           </Link>
         </div>
