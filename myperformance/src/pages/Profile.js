@@ -19,8 +19,8 @@ function Profile() {
         // Simulated delay
         await new Promise(resolve => setTimeout(resolve, 1000));
         // Set dummy data
-        setUsername("JohnDoe");
-        setEmail("johndoe@example.com");
+        setUsername("Eduardo PT");
+        setEmail("ptlife@egmail.com");
         setPassword("********");
         setUserId("123456");
         };
