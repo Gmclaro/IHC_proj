@@ -70,7 +70,6 @@ function Menu() {
               <Link to='/Login' style={{ textDecoration: 'none' }} className="menu-item-wrapper" onClick={() =>{setIsActive(false)}} >
                 <p className="menu-item">Login/Register</p>
               </Link>
-
             </div>
 
         </div>

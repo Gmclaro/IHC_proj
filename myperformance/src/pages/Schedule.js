@@ -10,9 +10,14 @@ function Schedule () {
 
     const [date, setDate] = useState("");
     const [duration, setDuration] = useState("60");
+    const [calories, setCalories] = useState("120")
     const [success, setSuccess] = useState("");
     const [loggedUser, setUser] = React.useState("");
     const [exerciseType, setExerciseType] = useState("");
+    const [exerciseType1, setExerciseType1] = useState("");
+    const [exerciseType2, setExerciseType2] = useState("");
+
+    const [bodyPart, setBodyPart] = useState("");
     
 
     useEffect(() => {
@@ -85,7 +90,7 @@ function Schedule () {
                         const timeFormatted = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + "-" + endTime.getHours() + ":" + String(endTime.getMinutes()).padStart(2, '0')
 
                         return (
-                            <ScheduleCard key={schedule._id} id={schedule._id} date={dateFormatted} time={timeFormatted} user={schedule.username} exerciseType = {schedule.exerciseType}/>
+                            <ScheduleCard key={schedule._id} id={schedule._id} date={dateFormatted} time={timeFormatted} user={schedule.username} bodyPart = {schedule.bodyPart} calories = {schedule.calories}/>
                         )
                     })
                 }
@@ -117,11 +122,17 @@ function Schedule () {
                             <input type="number" name="duration" id="duration" className="input" placeholder="60" value={duration} onChange={(e) => setDuration(e.target.value)}/>
                         </div>
                     </div>
+                    <div className="flex-row" style={{height:"100%"}}>
+                        <div className="flex-column">
+                            <label className="black" style={{fontWeight:"500"}}>Calories</label>
+                            <input type="number" name="calories" id="calories" className="input" placeholder="120" value={calories} onChange={(e) => setCalories(e.target.value)}/>
+                        </div>
+                    </div>
                     {/* I want to add a dropdown menu here with a type of exercises (leg , chest, )  */}
                     <div className="flex-row" style={{height: "100%"}}>
                         <div className="flex-column">
                             <label className="black" style={{fontWeight: "500"}}>Body Part</label>
-                            <select name="exerciseType" id="exerciseType" className="input" value={exerciseType} onChange={(e) => setExerciseType(e.target.value)}>
+                            <select name="bodyPart" id="bodyPart" className="input" value={bodyPart} onChange={(e) => setBodyPart(e.target.value)}>
                             <option value="">Select body part</option>
                             <option value="Leg">Leg</option>
                             <option value="Chest">Chest</option>
@@ -130,12 +141,64 @@ function Schedule () {
                             <option value="Biceps">Biceps</option>
                             <option value="Triceps">Triceps</option>
                             <option value="Core">Core</option>
-                            <option value="Cardio">Cardio</option>
                             {/* Add more options for other exercise types */}
                             </select>
                         </div>
                     </div>
+                    <div className="flex-row" style={{height: "100%"}}>
+                        <div className="flex-column">
+                            <label className="black" style={{fontWeight: "500"}}>Exercise 1</label>
+                            <select name="exerciseType" id="exerciseType" className="input" value={exerciseType} onChange={(e) => setExerciseType(e.target.value)}>
+                            <option value="">Select exercise</option>
+                            <option value="Leg">Bench Press</option>
+                            <option value="Chest">Push-ups</option>
+                            <option value="Back">Lat Pulldown</option>
+                            <option value="Shoulder">Back extension</option>
+                            <option value="Biceps">Bicep Curl</option>
+                            <option value="Triceps">Bench dips</option>
+                            <option value="Core">Skull Crushers</option>
+                            <option value="Cardio">Plank</option>
 
+                            {/* Add more options for other exercise types */}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="flex-row" style={{height: "100%"}}>
+                        <div className="flex-column">
+                            <label className="black" style={{fontWeight: "500"}}>Exercise 2</label>
+                            <select name="exerciseType1" id="exerciseType1" className="input" value={exerciseType1} onChange={(e) => setExerciseType1(e.target.value)}>
+                            <option value="">Select exercise</option>
+                            <option value="Leg">Bench Press</option>
+                            <option value="Chest">Push-ups</option>
+                            <option value="Back">Lat Pulldown</option>
+                            <option value="Shoulder">Back extension</option>
+                            <option value="Biceps">Bicep Curl</option>
+                            <option value="Triceps">Bench dips</option>
+                            <option value="Core">Skull Crushers</option>
+                            <option value="Cardio">Plank</option>
+                            
+                            {/* Add more options for other exercise types */}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="flex-row" style={{height: "100%"}}>
+                        <div className="flex-column">
+                            <label className="black" style={{fontWeight: "500"}}>Exercise 3</label>
+                            <select name="exerciseType2" id="exerciseType2" className="input" value={exerciseType2} onChange={(e) => setExerciseType2(e.target.value)}>
+                            <option value="">Select exercise</option>
+                            <option value="Leg">Bench Press</option>
+                            <option value="Chest">Push-ups</option>
+                            <option value="Back">Lat Pulldown</option>
+                            <option value="Shoulder">Back extension</option>
+                            <option value="Biceps">Bicep Curl</option>
+                            <option value="Triceps">Bench dips</option>
+                            <option value="Core">Skull Crushers</option>
+                            <option value="Cardio">Plank</option>
+                            
+                            {/* Add more options for other exercise types */}
+                            </select>
+                        </div>
+                    </div>                    
                     <div className="modal-bottom">
                         <input type="submit" value="Add" className="btn-xs" />
                         <p className={success === true ? "success-txt" : "error-txt"}></p>
