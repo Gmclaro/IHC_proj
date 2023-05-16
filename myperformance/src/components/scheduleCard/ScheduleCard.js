@@ -69,9 +69,9 @@ const ScheduleCard = (props) => {
       <button className="delete-button" onClick={() => openModal(id)}>
         <FaTrashAlt />
       </button>
-      <button className="edit-button" onClick={() => openModal(id)}>
+      {/* <button className="edit-button" onClick={() => openModal(id)}>
         <FaEdit />
-      </button>
+      </button> */}
       
       {showModal && (
         <div className="modal">

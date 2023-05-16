@@ -38,6 +38,8 @@ function Schedule () {
             date: new Date(date),
             duration: parseInt(duration),
             username: loggedUser.username,
+            bodyPart: bodyPart,
+            calories: parseInt(calories)
         };
     
         // Update schedules state with new schedule
