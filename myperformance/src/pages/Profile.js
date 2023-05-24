@@ -20,7 +20,7 @@ function Profile() {
         await new Promise(resolve => setTimeout(resolve, 1000));
         // Set dummy data
         setUsername("Eduardo PT");
-        setEmail("ptlife@egmail.com");
+        setEmail("ptlife@gmail.com");
         setPassword("********");
         setUserId("123456");
         };

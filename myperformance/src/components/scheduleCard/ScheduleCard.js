@@ -6,19 +6,10 @@ import { FaEdit } from 'react-icons/fa';
 
 
 const ScheduleCard = (props) => {
-  const [loggedUser, setLoggedUser] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedScheduleId, setSelectedScheduleId] = useState("");
+  
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      // Simulating a successful login
-      setTimeout(() => {
-        setLoggedUser({ username: "JohnDoe" });
-      }, 2000); // Simulating a delay of 2 seconds
-    }
-  }, []);
 
   const handleDelete = () => {
     // Perform deletion logic here using selectedScheduleId

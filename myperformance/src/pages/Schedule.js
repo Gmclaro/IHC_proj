@@ -12,7 +12,8 @@ function Schedule () {
     const [duration, setDuration] = useState("60");
     const [calories, setCalories] = useState("120")
     const [success, setSuccess] = useState("");
-    const [loggedUser, setUser] = React.useState("");
+    // 
+    const [user, setUser] = useState("");
     const [exerciseType, setExerciseType] = useState("");
     const [exerciseType1, setExerciseType1] = useState("");
     const [exerciseType2, setExerciseType2] = useState("");
@@ -37,16 +38,12 @@ function Schedule () {
             _id: Date.now(),
             date: new Date(date),
             duration: parseInt(duration),
-            username: loggedUser.username,
+            user: user,
             bodyPart: bodyPart,
             calories: parseInt(calories)
         };
     
-        // Update schedules state with new schedule
         setSchedules([...schedules, newSchedule]);    
-        // Update mock data with new schedule
-        //Schedulex = [...Schedulex, newSchedule]
-
         console.log(Schedulex)
         
     }
@@ -92,7 +89,7 @@ function Schedule () {
                         const timeFormatted = date.getHours() + ":" + String(date.getMinutes()).padStart(2, '0') + "-" + endTime.getHours() + ":" + String(endTime.getMinutes()).padStart(2, '0')
 
                         return (
-                            <ScheduleCard key={schedule._id} id={schedule._id} date={dateFormatted} time={timeFormatted} user={schedule.username} bodyPart = {schedule.bodyPart} calories = {schedule.calories}/>
+                            <ScheduleCard key={schedule._id} id={schedule._id} date={dateFormatted} time={timeFormatted} user={schedule.user} bodyPart = {schedule.bodyPart} calories = {schedule.calories}/>
                         )
                     })
                 }
@@ -130,7 +127,13 @@ function Schedule () {
                             <input type="number" name="calories" id="calories" className="input" placeholder="120" value={calories} onChange={(e) => setCalories(e.target.value)}/>
                         </div>
                     </div>
-                    {/* I want to add a dropdown menu here with a type of exercises (leg , chest, )  */}
+                    {/* i want to add the input for the users name */}
+                    <div className="flex-row" style={{height:"100%"}}>
+                        <div className="flex-column">
+                            <label className="black" style={{fontWeight:"500"}}>User</label>
+                            <input type="text" name="user" id="user" className="input" placeholder="User" value={user} onChange={(e) => setUser(e.target.value)}/>
+                        </div>
+                    </div>
                     <div className="flex-row" style={{height: "100%"}}>
                         <div className="flex-column">
                             <label className="black" style={{fontWeight: "500"}}>Body Part</label>
@@ -182,28 +185,9 @@ function Schedule () {
                             {/* Add more options for other exercise types */}
                             </select>
                         </div>
-                    </div>
-                    <div className="flex-row" style={{height: "100%"}}>
-                        <div className="flex-column">
-                            <label className="black" style={{fontWeight: "500"}}>Exercise 3</label>
-                            <select name="exerciseType2" id="exerciseType2" className="input" value={exerciseType2} onChange={(e) => setExerciseType2(e.target.value)}>
-                            <option value="">Select exercise</option>
-                            <option value="Leg">Bench Press</option>
-                            <option value="Chest">Push-ups</option>
-                            <option value="Back">Lat Pulldown</option>
-                            <option value="Shoulder">Back extension</option>
-                            <option value="Biceps">Bicep Curl</option>
-                            <option value="Triceps">Bench dips</option>
-                            <option value="Core">Skull Crushers</option>
-                            <option value="Cardio">Plank</option>
-                            
-                            {/* Add more options for other exercise types */}
-                            </select>
-                        </div>
-                    </div>                    
+                    </div>    
                     <div className="modal-bottom">
-                        <input type="submit" value="Add" className="btn-xs" />
-                        <p className={success === true ? "success-txt" : "error-txt"}></p>
+                        <input type="submit" value="Add" className="btn-xs"  />
                     </div>
 
                 </form>
